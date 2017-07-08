@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GPS.SimpleDI
 {
-    public interface IDefinitionLoader<T> where T: IInjectable
+    public interface IDefinitionLoader<out T> where T: IInjectable
     {
         T LoadDefintion();
     }

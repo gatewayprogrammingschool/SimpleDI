@@ -4,6 +4,8 @@
     {
         private class SampleLoader : IDefinitionLoader<SampleInjectable>
         {
+            public SampleLoader() { }
+
             public SampleInjectable LoadDefintion()
             {
                 return new SampleInjectable();

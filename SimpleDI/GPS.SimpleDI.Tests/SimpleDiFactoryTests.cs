@@ -9,9 +9,7 @@ namespace GPS.SimpleDI.Tests
         [TestMethod]
         public void JsonLoadTestDefaultConstructor()
         {
-            JsonDependencyLoader loader = new JsonDependencyLoader();
-
-            var jsonInjectableBase = loader.LoadDefintion();
+            var jsonInjectableBase = SimpleDiFactory.Load(typeof(JsonDependencyLoader));
 
             Assert.IsNotNull(jsonInjectableBase, "Loader returned null.");
             Assert.IsInstanceOfType(jsonInjectableBase, typeof(JsonInjectableBase),
@@ -26,11 +24,31 @@ namespace GPS.SimpleDI.Tests
         }
 
         [TestMethod]
+        public void JsonLoadTestDefaultStringConstructor()
+        {
+                    string json = @"
+{
+    'TypeNamespace': 'GPS.SimpleDI',
+    'TypeName': 'GPS.SimpleDI.JsonInjectableBase'
+}
+";
+        var jsonInjectableBase = SimpleDiFactory.Load(typeof(JsonDependencyLoader), json);
+
+            Assert.IsNotNull(jsonInjectableBase, "Loader returned null.");
+            Assert.IsInstanceOfType(jsonInjectableBase, typeof(JsonInjectableBase));
+
+            Assert.AreEqual("GPS.SimpleDI", jsonInjectableBase.TypeNamespace);
+
+            var instance = jsonInjectableBase.MakeObject();
+
+            Assert.IsNotNull(instance, "Could not create instance of JsonInjectableBase.");
+            Assert.IsInstanceOfType(instance, typeof(JsonInjectableBase));
+        }
+
+        [TestMethod]
         public void LoadSample()
         {
-            var loader = new SampleLoader();
-
-            var sampleInjectable = loader.LoadDefintion();
+            var sampleInjectable = SimpleDiFactory.Load(typeof(SampleLoader));
 
             Assert.IsNotNull(sampleInjectable, "Loader returned null.");
             Assert.IsInstanceOfType(sampleInjectable, typeof(SampleInjectable));
