@@ -1,0 +1,12 @@
+<package>
+  <metadata>
+    <id>GPS.SimpleDI</id>
+    <version>1.0.0.0</version>
+    <authors>Payton Byrd</authors>
+    <owners>Gateway Programming School, Inc.</owners>
+    <tags>Dependency-Injection</tags>
+    <licenseUrl>https://github.com/gatewayprogrammingschool/SimpleDI/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://github.gatewayprogramming.school</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+  </metadata>
+</package>
