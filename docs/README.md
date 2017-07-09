@@ -4,10 +4,13 @@
 ## What is it?
 SimpleDI is a new dependency injection system that is highly extensible.  It currently ships with an Injector and Loader for JSON-based objects.
 
+## Where do I get it?
+[Nuget.org]( https://www.nuget.org/packages/GPS.SimpleDI/)
+
 ## How to use it...
 First, create an instance of IInjectable.  This class will then be used as the target of a class implementing IDefintionLoader<IInjectable>.
 
-##Example:
+## Example:
 First you need to define the injectable.
 
     public class Sample : IInjectable {

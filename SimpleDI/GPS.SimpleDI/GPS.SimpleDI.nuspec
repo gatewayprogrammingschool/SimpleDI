@@ -1,18 +1,19 @@
 <package>
   <metadata>
     <id>GPS.SimpleDI</id>
-    <version>$version$</version>
+    <version>$Version$</version>
     <authors>Payton Byrd</authors>
     <owners>Gateway Programming School, Inc.</owners>
     <tags>Dependency-Injection</tags>
     <licenseUrl>https://github.com/gatewayprogrammingschool/SimpleDI/blob/master/LICENSE</licenseUrl>
     <projectUrl>http://github.gatewayprogramming.school</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>
-      SimpleDI (Simple Dependecy Injection) is a simple dependency injection system that
-      allows JSON to be used as an object definition.  You may also code definitions directly.
-      SimpleDI is extendable through implementing the IInjectable and IDependencyLoader 
-      interfaces.
-    </description>
+    <description>SimpleDI (Simple Dependecy Injection) is a simple dependency injection system that allows JSON to be used as an object definition.  You may also code definitions directly. SimpleDI is extendable through implementing the IInjectable and IDependencyLoader interfaces.</description>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="10.0.0.0" />
+    </dependencies>
   </metadata>
+  <files>
+    <file src=".\bin\Release\GPS.SimpleDI.*" target="lib\net452" />
+  </files>
 </package>
