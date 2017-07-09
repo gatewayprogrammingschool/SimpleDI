@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,23 +10,35 @@ namespace GPS.SimpleDI
 {
     public static class SimpleDiFactory
     {
-        public static IInjectable Load(Type type, params object[] parameters) 
+        public static IInjectable Load<T>(Type type, params object[] parameters) where T : class, IInjectable
         {
-            Trace.WriteLine($"Type to load Assembly {type.Assembly.FullName}, Item {type.FullName}");
-            if (parameters.Length == 0)
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (type.Assembly == null) throw new ArgumentNullException(nameof(type.Assembly));
+            Console.WriteLine($"Type to load Assembly {type.Assembly.FullName}, Item {type.FullName}");
+            if (parameters == null || parameters.Length == 0)
             {
-#if TRACE
-                parameters.ToList().ForEach(p => Trace.WriteLine($"Parameter: {p}"));
-#endif
+                dynamic loader = Activator.CreateInstance(type.Assembly.FullName, type.FullName)?.Unwrap(); // as IDefinitionLoader<T>;
 
-                var loader = Activator.CreateInstance(type.Assembly.FullName, type.FullName)?.Unwrap() as IDefinitionLoader<IInjectable>;
-
-                if(loader == null) throw new ApplicationException("Loader is not available.");
+                if (loader == null) throw new ApplicationException("Loader is not available.");
+                if (!(loader is IDefinitionLoader<T>))
+                    throw new ApplicationException($"Loader is wrong type {loader.GetType().FullName}");
 
                 return loader.LoadDefintion();
             }
+#if TRACE
+            parameters?.ToList().ForEach(p => Console.WriteLine($"Parameter: {p}"));
+#endif
+            dynamic l = Activator.CreateInstance(
+                type, 
+                System.Reflection.BindingFlags.Public | 
+                System.Reflection.BindingFlags.Instance, 
+                null, 
+                parameters, 
+                System.Globalization.CultureInfo.CurrentCulture);
 
-            dynamic l = Activator.CreateInstance(type, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance, null, parameters, System.Globalization.CultureInfo.CurrentCulture);
+            if (l == null) throw new ApplicationException("Loader is not available.");
+            if (!(l is IDefinitionLoader<T>))
+                throw new ApplicationException($"Loader is wrong type {l.GetType().FullName}");
 
             return l.LoadDefintion();
         }

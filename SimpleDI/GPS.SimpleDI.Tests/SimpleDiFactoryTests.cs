@@ -9,7 +9,7 @@ namespace GPS.SimpleDI.Tests
         [TestMethod]
         public void JsonLoadTestDefaultConstructor()
         {
-            var jsonInjectableBase = SimpleDiFactory.Load(typeof(JsonDependencyLoader));
+            var jsonInjectableBase = SimpleDiFactory.Load<JsonInjectableBase>(typeof(JsonDependencyLoader));
 
             Assert.IsNotNull(jsonInjectableBase, "Loader returned null.");
             Assert.IsInstanceOfType(jsonInjectableBase, typeof(JsonInjectableBase),
@@ -32,7 +32,7 @@ namespace GPS.SimpleDI.Tests
     'TypeName': 'GPS.SimpleDI.JsonInjectableBase'
 }
 ";
-        var jsonInjectableBase = SimpleDiFactory.Load(typeof(JsonDependencyLoader), json);
+        var jsonInjectableBase = SimpleDiFactory.Load<JsonInjectableBase>(typeof(JsonDependencyLoader), json);
 
             Assert.IsNotNull(jsonInjectableBase, "Loader returned null.");
             Assert.IsInstanceOfType(jsonInjectableBase, typeof(JsonInjectableBase));
@@ -48,7 +48,7 @@ namespace GPS.SimpleDI.Tests
         [TestMethod]
         public void LoadSample()
         {
-            var sampleInjectable = SimpleDiFactory.Load(typeof(SampleLoader));
+            var sampleInjectable = SimpleDiFactory.Load<SampleInjectable>(typeof(SampleLoader));
 
             Assert.IsNotNull(sampleInjectable, "Loader returned null.");
             Assert.IsInstanceOfType(sampleInjectable, typeof(SampleInjectable));
