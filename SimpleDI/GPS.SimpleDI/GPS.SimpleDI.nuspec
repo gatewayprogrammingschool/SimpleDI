@@ -12,6 +12,13 @@
     <dependencies>
       <dependency id="Newtonsoft.Json" version="10.0.0.0" />
     </dependencies>
+    <releaseNotes>
+      Version 1.0.0.3
+      Sharp Ninja
+      
+      - Updated SimpleDiFactory to behave more friendly to the caller
+        when there's an error.
+    </releaseNotes>
   </metadata>
   <files>
     <file src=".\bin\Release\GPS.SimpleDI.*" target="lib\net452" />
