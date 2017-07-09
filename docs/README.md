@@ -1,6 +1,9 @@
 # Simple Dependency Injection
 ### Copyright 2017 - Gateway Programming School, Inc.
 
+# UPDATE!
+If you downloaded version 1.0.0.0 or 1.0.0.1, you will not be able to use the package as OctoPack puts together the packages wrong for dependencies.  Version 1.0.0.2 and newer have the correct structure.
+
 ## What is it?
 SimpleDI is a new dependency injection system that is highly extensible.  It currently ships with an Injector and Loader for JSON-based objects.
 
