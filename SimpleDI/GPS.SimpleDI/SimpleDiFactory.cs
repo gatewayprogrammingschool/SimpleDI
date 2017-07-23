@@ -14,7 +14,9 @@ namespace GPS.SimpleDI
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
             if (type.Assembly == null) throw new ArgumentNullException(nameof(type.Assembly));
+#if TRACE
             Console.WriteLine($"Type to load Assembly {type.Assembly.FullName}, Item {type.FullName}");
+#endif
             if (parameters == null || parameters.Length == 0)
             {
                 dynamic loader = Activator.CreateInstance(type.Assembly.FullName, type.FullName)?.Unwrap(); // as IDefinitionLoader<T>;
@@ -23,7 +25,7 @@ namespace GPS.SimpleDI
                 if (!(loader is IDefinitionLoader<T>))
                     throw new ApplicationException($"Loader is wrong type {loader.GetType().FullName}");
 
-                return loader.LoadDefintion();
+                return ((IDefinitionLoader<T>)loader).LoadDefintion();
             }
 #if TRACE
             parameters?.ToList().ForEach(p => Console.WriteLine($"Parameter: {p}"));
@@ -40,7 +42,7 @@ namespace GPS.SimpleDI
             if (!(l is IDefinitionLoader<T>))
                 throw new ApplicationException($"Loader is wrong type {l.GetType().FullName}");
 
-            return l.LoadDefintion();
+            return ((IDefinitionLoader<T>)l).LoadDefintion();
         }
     }
 }
