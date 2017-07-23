@@ -10,19 +10,19 @@ function Deploy-Package
     $proj = $SolutionDir + '\' + $Namespace + '\' + $Namespace + '.csproj'
 	$assm = $BuildDir + '\' + $Assembly
 
-    C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe $proj /p:Configuration=Release /p:RunOctoPack=true
+&    "F:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\msbuild.exe" $proj /p:Configuration=Release /p:RunOctoPack=true
 
-    #$item = Get-ChildItem -Path $assm
-	
-    $AssemblyVersion = 
-        [Diagnostics.FileVersionInfo]::GetVersionInfo($assm).FileVersion
+	if($LASTEXITCODE -eq 0) {
+		$AssemblyVersion = 
+			[Diagnostics.FileVersionInfo]::GetVersionInfo($assm).FileVersion
     
-	$package = $BuildDir +'\' +$Namespace +'.' +$AssemblyVersion+'.nupkg'
+		$package = $BuildDir +'\' +$Namespace +'.' +$AssemblyVersion+'.nupkg'
 
-	Set-Location $SolutionDir
+		Set-Location $SolutionDir
 
-	packages\OctoPack.3.6.1\build\nuget.exe setApiKey 80804037-be3f-4c60-bfbe-5b0b40532e00 -source https://www.nuget.org
-	packages\OctoPack.3.6.1\build\nuget.exe push $package -Source https://www.nuget.org/api/v2/package
+		packages\OctoPack.3.6.1\build\nuget.exe setApiKey 80804037-be3f-4c60-bfbe-5b0b40532e00 -source https://www.nuget.org
+		packages\OctoPack.3.6.1\build\nuget.exe push $package -Source https://www.nuget.org/api/v2/package
+	}
 }
 
 Clear-Host
