@@ -1,0 +1,6 @@
+source https://api.nuget.org/v3/index.json
+
+nuget NuGet.CommandLine
+nuget MSTest.TestAdapter 1.1.11 restriction: >= net452
+nuget MSTest.TestFramework 1.1.11 restriction: >= net452
+nuget Newtonsoft.Json 10.0.3 restriction: >= net452

@@ -1,0 +1,6 @@
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    MSTest.TestAdapter (1.1.11) - restriction: >= net452
+    MSTest.TestFramework (1.1.11) - restriction: >= net452
+    Newtonsoft.Json (10.0.3) - restriction: >= net452
+    NuGet.CommandLine (4.1)
